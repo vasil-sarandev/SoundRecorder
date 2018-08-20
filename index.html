@@ -1,19 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>BroadCaster App</title>
+	<script src="./recorder/howler.js"></script>
+	<script src="./main.js"></script>
+	<script src="./recorder/audiodisplay.js"></script>
+	<script src="./recorder/recorder.js"></script>
+	<script src="./recorder/main.js"></script>
+	<script src="./recorder/playSounds.js"></script>
+	
+	<link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+	<div id="viz">
+		<canvas id="analyser" width="100%" height="300"></canvas>
+	</div>
+	<div id="controls">
+		<!--<img id="record" src="img/mic128.png" onclick="toggleRecording(this);"> -->
+		<div class="recordContainer">
+			<div id="recordBtn" onclick="toggleRecording(this);"> Record  </div>
+			<a id="save" href="#">Save</a>
+		</div>
+		<div class="othersContainer">
+				<div class="labels">
+						<span class="label" id="volumeLabel">Volume</span>
+						<span id="loopLabel">
+								Play in loop?
+						</span>
+				</div>
+				<div class="settings">
+						<input id="volume" type="range" min="0" max="1" step="0.05" value="0.5" onchange="volumeChanged()"/>
+						<span id="autoPlay">
+								<input type="checkbox" onchange="changeAutoPlay(this.checked)"/>
+						</span>
+				</div>
+				
+				<div id="playPauseButtons">
+					<div id="playBtn" onclick="playSound(this);"> <img src="./img/play.png"> </div>
+					<div id="pauseBtn" class="inactiveBtn" onclick="pauseSound(this);"> <img src="./img/pause.png"></div>
+					<div class="timers">
+						<div id="timerRemaining"></div>
+						<div id="timerTotal"></div>
+					</div>
+					<div id="progress"></div>
+					
+					
+					
+				</div>
+				<span id="announcements"></span>
+				
+				
+		</div>
+		
+		
+		
+	</div>
+</body>
+<script>
+document.getElementById('volume').addEventListener('change', function() {
+	volumeChanged(document.getElementById('volume').value);
+});
 
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
-  </body>
+window.Axis_timerRemaining = document.getElementById('timerRemaining');
+window.Axis_timerTotal = document.getElementById('timerTotal');
+window.Axis_playBtn = document.getElementById('playBtn');
+window.Axis_pauseBtn = document.getElementById('pauseBtn');
+window.Axis_autoPlay = document.getElementById('autoPlay');
+window.Axis_loopLabel = document.getElementById('loopLabel');
+window.Axis_announcements = document.getElementById('announcements');
+window.Axis_volumeLabel = document.getElementById('volumeLabel');
+window.Axis_volumeInput = document.getElementById('volume');
+window.Axis_progressBar = document.getElementById('progress');
+</script>
 </html>

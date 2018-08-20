@@ -7,8 +7,11 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
-
+  mainWindow = new BrowserWindow({width: 1500, height: 800})
+  //removes menu.
+  mainWindow.setMenu(null);
+  //open console. DELETE this before sending to client.
+  //mainWindow.webContents.openDevTools();
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
